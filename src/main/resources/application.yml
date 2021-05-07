@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: radius-search-mongo
+
+  data:
+    mongodb:
+      database: m201
+      uri: mongodb://localhost:27017/locations
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+
+
+resilience4j:
+  retry:
+    instances:
+      findRestaurantsNearPoint:
+        maxRetryAttempts: 3
+        waitDuration: 1000ms
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+      findRestaurantsNear:
+        maxRetryAttempts: 3
+        waitDuration: 1000ms
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
